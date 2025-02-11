@@ -30,8 +30,9 @@ export class CitasMedicasService {
     //  editar una cita
     updateCita(id: number, paciente: string, fecha: string, especialidadId: number): Observable<any> {
       const data = { paciente, fecha, especialidadId };
-      return this.http.put(`${this.apiUrl}/${id}`, data);
+      return this.http.put(`${this.apiUrl}/${id}`, data);  // Verifica que la URL esté bien formada
     }
+    
   
     // Reasignar especialidad a una cita
     updateEspecialidadCita(id: number, especialidadId: number): Observable<any> {
@@ -40,6 +41,7 @@ export class CitasMedicasService {
   
 
     getEspecialidades(): Observable<any> {
-      return this.http.get(`${this.apiUrl}/especialidades`); // Endpoint del backend
+      return this.http.get('http://localhost:3000/api/especialidades'); // URL correcta del endpoint de especialidades
     }
+    
   }
