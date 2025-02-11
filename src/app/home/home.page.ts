@@ -50,6 +50,34 @@ export class HomePage {
     });
   }
 
+  // Seleccionar cita para reasignar especialidad
+  seleccionarCita(cita: any) {
+    this.citaSeleccionada = cita;
+    this.paciente = cita.paciente;
+    this.fecha = cita.fecha;
+    this.especialidadId = cita.especialidadId;
+  }
+
+
+  // Reasignar especialidad a la cita seleccionada
+  reasignarEspecialidad() {
+    if (!this.citaSeleccionada || !this.especialidadId) {
+      console.error('Debe seleccionar una cita y una especialidad');
+      return;
+    }
+
+    this.citaService.updateEspecialidadCita(this.citaSeleccionada.id, this.especialidadId).subscribe({
+      next: (data) => {
+        console.log('Especialidad reasignada:', data);
+        this.cargarCitas(); // Recargar citas después de la reasignación
+        this.citaSeleccionada = null; // Limpiar selección
+      },
+      error: (error) => {
+        console.error('Error al reasignar especialidad:', error);
+      }
+    });
+  }
+
   // Filtrar citas por fecha y especialidad
   filtrarCitas() {
     if (!this.fecha || !this.especialidadId) {
@@ -85,15 +113,6 @@ export class HomePage {
     });
   }
 
-
-
-  seleccionarCita(cita: any) {
-    this.citaSeleccionada = cita;
-    this.paciente = cita.paciente;
-    this.fecha = cita.fecha;
-    this.especialidadId = cita.especialidadId;
-  }
-
   //  Editar cita seleccionada
   editarCita() {
     if (!this.citaSeleccionada) {
@@ -112,4 +131,6 @@ export class HomePage {
       }
     });
   }
+
+
 }

@@ -34,10 +34,11 @@ export class CitasMedicasService {
     }
     
   
-    // Reasignar especialidad a una cita
-    updateEspecialidadCita(id: number, especialidadId: number): Observable<any> {
-      return this.http.patch(`${this.apiUrl}/${id}/especialidad`, { especialidadId });
-    }
+// Reasignar especialidad a una cita
+updateEspecialidadCita(id: number, especialidadId: number): Observable<any> {
+  return this.http.patch(`${this.apiUrl}/${id}/especialidad`, { especialidadId });
+}
+
   
 
     getEspecialidades(): Observable<any> {

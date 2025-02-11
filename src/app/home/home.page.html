@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  
   <!-- Registrar Nueva Cita -->
   <ion-card>
     <ion-card-header>
@@ -69,6 +70,9 @@
 
       <!-- Botón para seleccionar cita y editar -->
       <ion-button color="primary" (click)="seleccionarCita(cita)">Editar</ion-button>
+
+      <!-- Botón para reasignar especialidad -->
+      <ion-button color="secondary" (click)="seleccionarCita(cita)">Reasignar Especialidad</ion-button>
     </ion-card-content>
   </ion-card>
 
@@ -97,8 +101,27 @@
         </ion-select>
       </ion-item>
 
-      <ion-button expand="full" color="success" (click)="editarCita()">Guardar Cambios</ion-button>
       <ion-button expand="full" color="danger" (click)="citaSeleccionada = null">Cancelar</ion-button>
+      <ion-button expand="full" (click)="editarCita()">Guardar Cambios</ion-button>
     </ion-card-content>
   </ion-card>
+
+  <!-- Reasignar Especialidad (solo si se seleccionó una cita) -->
+  <ion-card *ngIf="citaSeleccionada">
+    <ion-card-header>
+      <ion-card-title>Reasignar Especialidad</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Especialidad</ion-label>
+        <ion-select [(ngModel)]="especialidadId">
+          <ion-select-option *ngFor="let esp of especialidades" [value]="esp.id">
+            {{ esp.nombre }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button expand="full" (click)="reasignarEspecialidad()">Reasignar Especialidad</ion-button>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
